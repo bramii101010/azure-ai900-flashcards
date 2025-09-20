@@ -1,0 +1,238 @@
+import React, { useState } from 'react';
+
+const azureAI900Data = [
+    {
+        "term": "Azure AI Services",
+        "definition": "Suite of prebuilt and customizable AI APIs for vision, speech, language, decision, and agents.",
+        "scenario": "A developer needs to add speech recognition and image analysis to their app."
+    },
+    {
+        "term": "Azure AI Foundry",
+        "definition": "Unified platform for building, testing, and deploying AI applications with foundation models like GPT-5.",
+        "scenario": "A team wants to build custom AI agents using the latest foundation models in a single platform."
+    },
+    {
+        "term": "Azure Machine Learning",
+        "definition": "Platform for training, deploying, and managing machine learning models with tools like AutoML.",
+        "scenario": "A data scientist wants to train and deploy a predictive model at scale."
+    },
+    {
+        "term": "Azure OpenAI Service",
+        "definition": "Access to large language models (GPT-4, GPT-5) and foundation models for generative AI tasks.",
+        "scenario": "An HR chatbot uses GPT to generate natural, conversational responses."
+    },
+    {
+        "term": "Azure AI Search",
+        "definition": "Search-as-a-service combining keyword, vector, and hybrid search with AI enhancements.",
+        "scenario": "An app needs to let users search product manuals by keyword or semantic meaning."
+    },
+    {
+        "term": "Azure AI Speech",
+        "definition": "Converts speech to text, text to speech, and provides speech translation and recognition.",
+        "scenario": "Call center calls are transcribed automatically for analytics."
+    },
+    {
+        "term": "Azure AI Vision",
+        "definition": "Analyzes images and video: object detection, face detection, OCR, and tagging.",
+        "scenario": "A retailer uses OCR to extract prices and product names from shelf labels."
+    },
+    {
+        "term": "Azure AI Language",
+        "definition": "Natural language processing: sentiment, key phrase extraction, summarization, translation.",
+        "scenario": "Analyzing customer reviews for sentiment and trending topics."
+    },
+    {
+        "term": "Translator",
+        "definition": "Provides real-time translation for text and documents in many languages.",
+        "scenario": "A messaging app translates chat messages instantly between English and Spanish."
+    },
+    {
+        "term": "Document Intelligence",
+        "definition": "Extracts text, tables, and key-value pairs from documents and forms.",
+        "scenario": "A finance app extracts totals and vendors from scanned receipts."
+    },
+    {
+        "term": "Face",
+        "definition": "Detects and recognizes faces; can identify or verify individuals.",
+        "scenario": "A security app matches a person's photo to an employee database."
+    },
+    {
+        "term": "Immersive Reader",
+        "definition": "Helps users read and comprehend text with accessibility features.",
+        "scenario": "A reading app highlights and reads text aloud to learners."
+    },
+    {
+        "term": "Video Indexer",
+        "definition": "Extracts insights from video: transcripts, topics, speaker identification, and emotions.",
+        "scenario": "A news archive app auto-tags videos with people and topics."
+    },
+    {
+        "term": "Azure Bot Service",
+        "definition": "Framework for building and deploying conversational bots across multiple channels.",
+        "scenario": "A customer support bot answers FAQs on Teams, Slack, and a website."
+    },
+    {
+        "term": "Azure AI Content Safety",
+        "definition": "Detects harmful or inappropriate text and images to keep applications safe.",
+        "scenario": "A social app uses content safety to block offensive uploads."
+    },
+    {
+        "term": "Custom Vision",
+        "definition": "Train custom image classifiers and object detectors with your own labeled data.",
+        "scenario": "A farm app detects specific crop diseases from uploaded plant photos."
+    },
+    {
+        "term": "Microsoft Copilot Studio",
+        "definition": "Low-code platform for building and customizing AI-powered copilots and chatbots.",
+        "scenario": "HR builds a custom employee assistant that answers policy questions."
+    },
+    {
+        "term": "Azure Copilot",
+        "definition": "AI assistant that helps manage and optimize Azure resources and operations.",
+        "scenario": "DevOps team gets AI-powered suggestions for troubleshooting cloud infrastructure."
+    },
+    {
+        "term": "Azure AI Studio",
+        "definition": "Collaborative environment for developing and managing AI projects and models.",
+        "scenario": "Data science team collaborates on building and testing ML models in one workspace."
+    },
+    {
+        "term": "Personalizer",
+        "definition": "Reinforcement learning service that personalizes content and recommendations.",
+        "scenario": "E-commerce site shows different product recommendations based on user behavior."
+    },
+    {
+        "term": "Anomaly Detector",
+        "definition": "Identifies unusual patterns and outliers in time-series data.",
+        "scenario": "Manufacturing system detects equipment malfunctions from sensor data patterns."
+    },
+    {
+        "term": "Metrics Advisor",
+        "definition": "AI-powered service for monitoring metrics and diagnosing issues.",
+        "scenario": "Business monitors KPIs and gets alerts when metrics deviate from expected patterns."
+    },
+    {
+        "term": "Content Moderator",
+        "definition": "AI service that detects potentially offensive or unwanted content.",
+        "scenario": "Online forum automatically flags inappropriate posts for review."
+    },
+    {
+        "term": "Form Recognizer",
+        "definition": "Legacy name for Document Intelligence - extracts data from forms and documents.",
+        "scenario": "Insurance company processes claim forms by extracting key information automatically."
+    }
+];
+
+const AzureAI900Flashcards = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isFlipped, setIsFlipped] = useState(false);
+    const [shuffledData, setShuffledData] = useState([...azureAI900Data]);
+    const [showingDefinition, setShowingDefinition] = useState(true);
+
+    const shuffleArray = (array) => {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+    };
+
+    const shuffle = () => {
+        setShuffledData(shuffleArray(azureAI900Data));
+        setCurrentIndex(0);
+        setIsFlipped(false);
+        setShowingDefinition(true);
+    };
+
+    const nextCard = () => {
+        if (currentIndex < shuffledData.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+            setIsFlipped(false);
+            setShowingDefinition(true);
+        }
+    };
+
+    const prevCard = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+            setIsFlipped(false);
+            setShowingDefinition(true);
+        }
+    };
+
+    const flipCard = () => {
+        setIsFlipped(!isFlipped);
+        setShowingDefinition(!showingDefinition);
+    };
+
+    const currentCard = shuffledData[currentIndex];
+    const progress = ((currentIndex + 1) / shuffledData.length) * 100;
+
+    return (
+        <div className="container">
+            <div className="header">
+                <h1>🎯 Azure AI-900 Services</h1>
+                <p>Interactive flashcards for mastering Azure AI services and concepts</p>
+            </div>
+
+            <div className="progress">
+                <div className="progress-bar" style={{width: `${progress}%`}}></div>
+                <div className="progress-text">
+                    {currentIndex + 1} of {shuffledData.length}
+                </div>
+            </div>
+
+            <div className="controls">
+                <button 
+                    className="btn" 
+                    onClick={prevCard}
+                    disabled={currentIndex === 0}
+                >
+                    ← Previous
+                </button>
+                <button 
+                    className="btn shuffle-btn" 
+                    onClick={shuffle}
+                >
+                    🔀 Shuffle
+                </button>
+                <button 
+                    className="btn" 
+                    onClick={nextCard}
+                    disabled={currentIndex === shuffledData.length - 1}
+                >
+                    Next →
+                </button>
+            </div>
+
+            <div className="flashcard-container">
+                <div 
+                    className={`flashcard ${isFlipped ? 'flipped' : ''}`}
+                    onClick={flipCard}
+                >
+                    <div className="flashcard-side flashcard-front">
+                        <h2>📖 Definition</h2>
+                        <p>{currentCard.definition}</p>
+                        {currentCard.scenario && (
+                            <div className="scenario">
+                                <strong>Scenario:</strong> {currentCard.scenario}
+                            </div>
+                        )}
+                        {!isFlipped && <div className="flip-hint">Click to see the service name →</div>}
+                    </div>
+                    
+                    <div className="flashcard-side flashcard-back">
+                        <h2>🔧 Azure Service</h2>
+                        <p style={{fontSize: '2.5rem', fontWeight: 'bold', color: '#fff'}}>
+                            {currentCard.term}
+                        </p>
+                        {isFlipped && <div className="flip-hint">Click to see the definition ←</div>}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default AzureAI900Flashcards;
