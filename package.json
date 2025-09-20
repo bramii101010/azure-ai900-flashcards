@@ -1,0 +1,34 @@
+{
+  "name": "azure-ai900-flashcards",
+  "version": "1.0.0",
+  "description": "Interactive flashcards for Azure AI-900 services and terms",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve .",
+    "build": "echo 'Static build complete'"
+  },
+  "keywords": [
+    "azure",
+    "ai-900",
+    "flashcards",
+    "certification",
+    "ai",
+    "machine-learning",
+    "react"
+  ],
+  "author": "AI-900 Study Guide",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/azure-ai900-flashcards.git"
+  },
+  "homepage": "https://yourusername.github.io/azure-ai900-flashcards"
+}
